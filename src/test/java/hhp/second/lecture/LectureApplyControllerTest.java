@@ -1,5 +1,7 @@
 package hhp.second.lecture;
 
+import hhp.second.lecture.controller.LectureApplyController;
+import hhp.second.lecture.service.LectureApplyService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
