@@ -1,6 +1,7 @@
 package hhp.second.lecture.controller;
 
 import hhp.second.lecture.dtos.ResultDto;
+import hhp.second.lecture.dtos.StudentDto;
 import hhp.second.lecture.service.LectureApplyService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +15,13 @@ public class LectureApplyController {
     public LectureApplyController(LectureApplyService service) {
         this.service = service;
     }
-    @GetMapping("{id}")
-    public ResultDto succOrNot(@PathVariable("id") long id){
-        return service.succOrNot(id);
+
+    @GetMapping
+    public ResultDto succOrNot(@RequestBody StudentDto body){
+        return service.succOrNot(body);
     }
-    @PostMapping("{id}")
-    public ResultDto apply(@PathVariable("id") long id, @RequestBody Map<String,String> body){
-        return service.apply(id);
+    @PostMapping
+    public ResultDto apply(@RequestBody StudentDto body){
+        return service.apply(body);
     }
 }

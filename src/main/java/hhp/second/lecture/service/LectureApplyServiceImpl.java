@@ -2,6 +2,7 @@ package hhp.second.lecture.service;
 
 import hhp.second.lecture.ResultMsg;
 import hhp.second.lecture.dtos.ResultDto;
+import hhp.second.lecture.dtos.StudentDto;
 import hhp.second.lecture.repository.LectureApplyRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,26 +14,33 @@ public class LectureApplyServiceImpl implements LectureApplyService{
         this.repository = repository;
     }
     @Override
-    public ResultDto apply(long id) {
-        if(!inList(id)){
-            return new ResultDto(false,ResultMsg.FAILED);
+    public ResultDto apply(StudentDto studentDto) {
+        if(inList(studentDto)){
+            return new ResultDto(true,ResultMsg.ALREADY_APPLIED);
         }
-        int result = repository.apply(id);
+        if(!isTime(studentDto)){
+
+        }
+        repository.apply(studentDto);
+
         return new ResultDto(true, ResultMsg.SUCCESS);
     }
     @Override
-    public ResultDto succOrNot(long id) {
-        boolean result = inList(id);
+    public ResultDto succOrNot(StudentDto studentDto) {
+        boolean result = inList(studentDto);
         ResultDto resultDto;
         if(result){
-            resultDto = new ResultDto(true,ResultMsg.SUCCESS);
+            resultDto = new ResultDto(true, ResultMsg.DONE_WELL);
         }else{
-            resultDto = new ResultDto(true,ResultMsg.FAILED);
+            resultDto = new ResultDto(false,ResultMsg.FAILED);
         }
         return resultDto;
     }
-    private boolean inList(long id){
-        return repository.inList();
+    private boolean inList(StudentDto studentDto){
+        return repository.inList(studentDto);
+    }
+    private boolean isTime(StudentDto studentDto){
+        return repository.isTime(studentDto);
     }
 
 }

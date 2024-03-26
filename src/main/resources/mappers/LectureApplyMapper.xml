@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hhp.second.lecture.repository.LectureApplyRepository">
+
+    <insert id="apply" parameterType="hhp.second.lecture.dtos.StudentDto">
+        insert into studentList
+        values (#{id},#{studentName},#{lectureCode},now())
+    </insert>
+    <select id="inList" parameterType="hhp.second.lecture.dtos.StudentDto" resultType="boolean">
+        select case when exists(select
+                                    1
+                                from studentList
+                                where id=#{id}
+                                and code=#{lectureCode}) then true else false end
+    </select>
+    <select id="isTime" parameterType="hhp.second.lecture.dtos.StudentDto" resultType="boolean">
+        select case when exists(select
+                                    1
+                                from lecture
+                                where code=#{lectureCode}
+                                and (startApplication < now() and finishApplication > now())) then true else false end
+    </select>
+</mapper>
