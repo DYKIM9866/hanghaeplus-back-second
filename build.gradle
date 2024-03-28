@@ -23,6 +23,14 @@ dependencies {
 	implementation 'org.projectlombok:lombok'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 }
+sourceSets{
+	main{
+		resources {
+			srcDirs = ["src/main/resources"]
+			include "mappers/*.xml"
+		}
+	}
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
