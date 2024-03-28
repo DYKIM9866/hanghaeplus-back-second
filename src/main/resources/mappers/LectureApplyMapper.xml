@@ -13,13 +13,14 @@
                                     1
                                 from studentList
                                 where id=#{id}
-                                and code=#{lectureCode}) then true else false end
+                                and lecturecode=#{lectureCode}) then true else false end
     </select>
     <select id="isTime" parameterType="hhp.second.lecture.dtos.StudentDto" resultType="boolean">
-        select case when exists(select
-                                    1
-                                from lecture
-                                where code=#{lectureCode}
-                                and (startApplication < now() and finishApplication > now())) then true else false end
+        select
+            1
+        from lecture
+        where lecturecode=#{lectureCode}
+        and startApplication < now()
+        and finishApplication > now()
     </select>
 </mapper>

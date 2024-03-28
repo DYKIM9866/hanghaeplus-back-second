@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LectureApplyServiceImpl implements LectureApplyService{
-
     private LectureApplyRepository repository;
-    public LectureApplyServiceImpl(LectureApplyRepository repository) {
-        this.repository = repository;
+    public LectureApplyServiceImpl(LectureApplyRepository lectureApplyRepository) {
+        this.repository = lectureApplyRepository;
     }
     @Override
     public ResultDto apply(StudentDto studentDto) {

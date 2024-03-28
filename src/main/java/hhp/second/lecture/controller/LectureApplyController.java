@@ -16,9 +16,9 @@ public class LectureApplyController {
         this.service = service;
     }
 
-    @GetMapping
-    public ResultDto succOrNot(@RequestBody StudentDto body){
-        return service.succOrNot(body);
+    @GetMapping("{id}")
+    public ResultDto succOrNot(@PathVariable("id") long id,@RequestParam String lectureCode){
+        return service.succOrNot(new StudentDto(id, lectureCode));
     }
     @PostMapping
     public ResultDto apply(@RequestBody StudentDto body){
